@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
+
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/js/function/loader.js"></script>
+	<script src="/js/function/formSumbiter.js"></script>
+
+
+
+	<!-- 	<p th:text="'Hello, ' + ${name} + '!'" /> -->
+	<button id="runScanner" type="submit" class="btn btn-primary">Запуси</button>
+
+
+	<!-- 	<p 	="'Hello, ' + ${lists} + '!'" />
+	<p th:text="'Hello, ' + ${} + '!'" /> -->
+	<h1>мои ордера:</h1>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>код</th>
+				<th>дата</th>
+				<th>количество</th>
+				<th>цена</th>
+				<th>стоимость</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="order : ${orders}">
+				<th scope="row" th:text='${order.id}'></th>
+				<th th:text='${order.name}'></th>
+				<th th:text='${order.date}'></th>
+				<th th:text='${order.count}'></th>
+				<th th:text='${order.price}'></th>
+				<th th:text='${order.summ}'></th>
+			</tr>
+
+		</tbody>
+
+	</table>
+	<div class="col-md-6">
+		добавить ордер:
+		<form name="addOrderForm">
+			<div class="form-group">
+				<label for="exampleSelect1">код:</label> <select
+					class="form-control" name="sid" id="exampleSelect1">
+					<tr th:each="tool : ${lists}">
+						<option th:value='${tool.secId}' th:text='${tool.fullName}'></option>
+					</tr>
+				</select>
+			</div>
+
+			<div class="form-group row">
+				<label for="example-number-input" class=" col-form-label">цена</label>
+				<input class="form-control" type="text" name="price" value="0"
+					id="example-number-input">
+			</div>
+			<div class="form-group row">
+				<label for="example-number-input" class=" col-form-label">количество</label>
+				<input class="form-control" type="number" name="count" value="0"
+					id="example-number-input">
+			</div>
+
+			<div class="form-group row">
+				<label for="example-number-input" class=" col-form-label">общая
+					стоимость</label>
+				<fieldset disabled>
+					<input class="form-control" type="number" value="0"
+						id="example-number-input">
+				</fieldset>
+			</div>
+
+			<div class="form-check">
+				<label class="form-check-label"> <input
+					class="form-check-input" type="radio" id="exampleRadios1"
+					name="operation" value="buy" checked>покупка
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label"> <input
+					class="form-check-input" type="radio" id="exampleRadios2"
+					name="operation" value="sell">продажа
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="dtpickerdemo" class="col-sm-2 control-label">Select
+					date/time:</label>
+				<div class='col-sm-4 input-group date'>
+					<input type='text' class="form-control" name="date"
+						id='dtpickerdemo' />
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					$('#dtpickerdemo').datetimepicker();
+				});
+			</script>
+			<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
